@@ -41,10 +41,10 @@ import { AiFillChrome } from "react-icons/ai";
 const roboto = Rubik({ subsets: ['latin'], weight: '800' });
 const roboto2 = Rubik({ subsets: ['latin'], weight: '600', });
 const roboto3 = Rubik({ subsets: ['latin'], weight: '300', });
-const DisqusComments = dynamic(() => import('@/components/DisQus'), { ssr: false });
+// const DisqusComments = dynamic(() => import('@/components/DisQus'), { ssr: false });
 import dynamic from 'next/dynamic';
 const Popup = dynamic(() => import('@/components/Popup'), { ssr: false });
-
+const MyDynamicComp = dynamic(() => import('@/components/MyDynamicComp'), { ssr: false });
 // import React from 'react';
 // import parse from 'html-react-parser';
 // import { getAllMetaTags } from '@/actions/metatags';
@@ -271,7 +271,11 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
 
                         <div className='md:w-[700px] md:pr-5 md:p-0 p-4'>
                             <h1 className={`${roboto.className} tracking-wider text-center font-bold text-2xl pt-6 pb-5 `}>{`${manga?.manga?.fullname}`}</h1>
-                            <p className={`${roboto3.className} my-4 leading-[2] text-[15px] px-2 text-center `}>{manga?.manga?.description}</p>
+                            <MyDynamicComp>
+                                <p className={`${roboto3.className} my-4 leading-[2] text-[15px] px-2 text-center `}>
+                                    {manga?.manga?.description}
+                                </p>
+                            </MyDynamicComp>
 
                             {/* <div className="flex flex-wrap justify-center mt-5 gap-5 sm:px-4 px-2">
                                 {manga?.manga?.categories?.map((category, index) => (
@@ -289,14 +293,15 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
                                 </div>
 
                                 <div className="text-center">
+                                    <p className={`${roboto2.className} font-bold sm:text-[18px] text-[14px] mb-2`}>Author</p>
+                                    <p className={`${roboto2.className} sm:text-[16px] text-[13px]`}>{manga?.manga?.author}</p>
+                                </div>
+
+                                <div className="text-center">
                                     <p className={`${roboto2.className} font-bold sm:text-[18px] text-[14px] mb-2`}>Type</p>
                                     <p className={`${roboto2.className} sm:text-[16px] text-[13px]`}>{manga?.manga?.type}</p>
                                 </div>
 
-                                <div className="text-center">
-                                    <p className={`${roboto2.className} font-bold sm:text-[18px] text-[14px] mb-2`}>Author</p>
-                                    <p className={`${roboto2.className} sm:text-[16px] text-[13px]`}>{manga?.manga?.author}</p>
-                                </div>
 
                             </div>
 
@@ -343,13 +348,13 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
                     </div>
 
 
-                    <h2 className='md:text-4xl text-2xl font-bold text-center text-[white] font-blod px-4 mb-10 md:mt-[100px] mt-8'>Comment Section</h2>
+                    {/* <h2 className='md:text-4xl text-2xl font-bold text-center text-[white] font-blod px-4 mb-10 md:mt-[100px] mt-8'>Comment Section</h2>
                     <div className='py-10 max-w-[1100px] mx-auto bg-[black] border border-[#1d1c1c] rounded-md'>
 
                         <section className=' mx-auto px-5 '>
                             <DisqusComments url={`/series/${mangaurl}`} identifier={mangaurl} title={`${manga?.manga?.name} ${manga?.manga?.type}`} />
                         </section>
-                    </div>
+                    </div> */}
 
 
                     {/* <div className="max-w-[1200px] mx-auto mt-10 px-3">
